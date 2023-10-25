@@ -1,0 +1,30 @@
+
+
+Run zookeeper server:    bin/zkServer.sh --config conf start
+Run Kafka server:    bin/kafka-server-start.sh config/server.properties
+Stop zookeeper:   ./bin/zkServer.sh stop
+
+Create a topic:  bin/kafka-topics.sh --create --topic my-topic --bootstrap-server 10.60.9.156:9092 --partitions 3 --replication-factor 1
+Produce the data to topic:   bin/kafka-console-producer.sh --topic my-topic --bootstrap-server 10.60.9.156:9092
+Consume from the topic:  bin/kafka-console-consumer.sh --topic my-topic --from-beginning --bootstrap-server 10.60.9.156:9092
+
+        WE CAN'T USE COMMAND LINE PRODUCER BCZ IT WONT TAKE DATA PATH INSTEAD WE HAVE TO WRITE THE DATA AFTERWARDS.
+        
+
+Send data with py:     python kafka_producer.py my-topic /path/to/your/data_file.jpg
+Receive data with py:     python kafka_consumer.py my-topic
+
+
+Delete a topic:   bin/kafka-topics.sh --delete --topic topic-name --bootstrap-server 10.60.9.156:9092
+Check if kafka is running:      ps aux | grep kafka
+Check if Zookeeper is running:      ps aux | grep zookeeper
+List of topic currently running:   bin/kafka-topics.sh --list --bootstrap-server 10.60.9.156:9092
+
+
+Add partitions:   bin/kafka-topics.sh --create --topic new-data-topic --bootstrap-server 10.60.9.156:9092 --partitions 5 --replication-factor 1
+Alter partitions:    bin/kafka-topics.sh --alter --topic existing-topic-name --bootstrap-server 10.60.9.156:9092 --partitions N
+
+
+LIMIT AUTHORIZATION to a perticular Topic(Node):   bin/kafka-acls.sh --authorizer-properties zookeeper.connect=10.60.9.156:2181 --add --allow-principal User:node-1 --operation Read --operation Write --topic topic-node-1
+
+
